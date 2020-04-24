@@ -27,11 +27,12 @@ plt.scatter(x1,y1)  #Plot Scatter Plotting using x1 and y1 lists
 any_matched = False
 for i in range(10):
     #yhat = mx + c here c=1.5, m=i+1
+    print("\n\tIteration {} begins".format(i+1))
     yhat=list(map(lambda x: ((i+1)*x + 1.5),x1)) #Predicting values with Linear Regression line
     yhat = [int(j) for j in yhat]   #converting to integers
     print("\nActual=",y1)
     print("\nPredicted=",yhat)
-    plt.plot(x1,yhat,lw=4)  #Plotting Straight line
+    plt.plot(x1,yhat,lw=2)  #Plotting Straight line
     #Find the diff between actual and predicted
     y1s = pd.Series(y1) #Convert list to Series
     yhats = pd.Series(yhat)
@@ -51,11 +52,11 @@ for i in range(10):
 #Compute Residuals
 #
     print("\nCount those matched=",list(diff).count(0)) #how many it could touch
-    print("\nResidual count = ",len(diff)-list(diff).count(0))
+    print("\n\nResidual count = ",len(diff)-list(diff).count(0))
     plt.pause(1)
 
     if (list(diff).count(0)) > 0:
-            print("\nIteration {} could hit somepoints {}:".format(i,list(diff).count(0)))
+            print("\nIteration {} could hit somepoints {}: at index {}".format(i+1,list(diff).count(0),list(diff).index(0)))
             any_matched = True
             last_hit = i + 1
 plt.show()
